@@ -1,12 +1,12 @@
 const conn = require('./conection');
 
 const findAll = async () => {
-  const [result] = await conn.execute('SELECT * FROM products ORDER BY id');
+  const [result] = await conn.execute('SELECT * FROM StoreManager.products ORDER BY id');
   return result;
 };
 
 const findById = async (id) => {
-  const [result] = await conn.execute('SELECT * FROM products WHERE id = ?', [id]);
+  const [result] = await conn.execute('SELECT * FROM StoreManager.products WHERE id = ?', [id]);
   return result;
 };
 
