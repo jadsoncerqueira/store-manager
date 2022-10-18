@@ -29,7 +29,7 @@ describe('Camada Service', function () {
   });
 
   it('Retorna um erro ao buscar id invalido', async function () {
-    sinon.stub(productsModel, 'findAll').resolves([]);
+    sinon.stub(productsModel, 'findAll').resolves({ type: 'INPUT_VALUE', message: '"id" inválido' });
     const response = await productsService.findById('g');
     expect(response).to.deep.equal({ type: 'INPUT_VALUE', message: '"id" inválido' })
     sinon.restore();
