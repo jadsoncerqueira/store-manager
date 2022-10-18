@@ -1,0 +1,39 @@
+const { validateQuantity } = require('./validations/validationsInputs');
+const { salesModel, productsModel } = require('../models');
+
+const aux = async (arr) => {
+  const ids = arr.map((el) => el.productId);
+  let valAux = false;
+
+  const results = ids.map(async (el) => {
+    const result = await productsModel.findById(el);
+    return result;
+  });
+
+  await Promise.all(
+    results.map(async (el) => {
+      const poxa = await el;
+      if (poxa.length < 1) {
+        valAux = true;
+      }
+    }),
+  );
+  return valAux;
+};
+
+const insert = async (arr) => {
+  let err = null;
+  arr.forEach(async (element) => {
+    const error = validateQuantity(element.quantity);
+    if (error.type) err = error;
+  });
+  if (err) return err;
+  if (await aux(arr)) return { type: 'PRODUCTS_NOT_FOUND', message: 'Product not found' };
+  
+  const id = await salesModel.insert(arr);
+  return { id, itemsSold: arr };
+};
+
+module.exports = {
+  insert,
+};
