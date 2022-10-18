@@ -17,9 +17,19 @@ const getProductsById = async (req, res) => {
   return res.status(200).json(productsAll.message[0]);
 };
 
+const insertProducts = async (req, res) => {
+  console.log(req.body);
+  const { name } = req.body;
+  const response = await productsService.insert(name);
+
+  if (response.type) return res.status(422).json({ message: response.message });
+  res.status(201).json({ id: response.message.insertId, name });
+};
+
 module.exports = {
   getProducts,
   getProductsById,
+  insertProducts,
 };
 
 // novo
