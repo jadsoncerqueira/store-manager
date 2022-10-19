@@ -18,7 +18,6 @@ const getProductsById = async (req, res) => {
 };
 
 const insertProducts = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   const response = await productsService.insert(name);
 
@@ -35,11 +34,20 @@ const updateProduct = async (req, res) => {
   res.status(200).json({ id, name, response });
 };
 
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  const response = await productsService.del(id);
+
+  if (response.type) return res.status(mapError(response.type)).json({ message: response.message });
+  res.status(204).json();
+};
+
 module.exports = {
   getProducts,
   getProductsById,
   insertProducts,
   updateProduct,
+  deleteProduct,
 };
 
 // novo
