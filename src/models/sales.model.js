@@ -36,8 +36,21 @@ const findById = async (id) => {
   return result;
 };
 
+const del = async (id) => {
+  await conn.execute(
+    'DELETE FROM StoreManager.sales WHERE  id = ?',
+    [id],
+  );
+
+  await conn.execute(
+    'DELETE FROM StoreManager.sales_products WHERE sale_id = ?',
+    [id],
+  );
+};
+
 module.exports = {
   insert,
   findAll,
   findById,
+  del,
 };

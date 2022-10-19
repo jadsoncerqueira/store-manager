@@ -16,12 +16,20 @@ const getSales = async (_req, res) => {
 const getByIdSales = async (req, res) => {
   const { id } = req.params;
   const response = await salesService.findById(id);
-  if (response.message) return res.status(404).json(response);
+  if (response.type) return res.status(mapError(response.type)).json(response);
   return res.status(200).json(response);
+};
+
+const deleteSales = async (req, res) => {
+  const { id } = req.params;
+  const response = await salesService.del(id);
+  if (response.type) return res.status(mapError(response.type)).json(response);
+  return res.status(204).json(response.message);
 };
 
 module.exports = {
   insertSales,
   getSales,
   getByIdSales,
+  deleteSales,
 };

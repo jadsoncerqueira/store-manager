@@ -41,12 +41,20 @@ const findAll = async () => {
 
 const findById = async (id) => {
   const response = await salesModel.findById(id);
-  if (response.length < 1) return { message: 'Sale not found' };
+  if (response.length < 1) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
   return response;
+};
+
+const del = async (id) => {
+  const response = await salesModel.findById(id);
+  if (response.length < 1) return { type: 'SALE_NOT_FOUND', message: 'Sale not found' };
+  await salesModel.del(id);
+  return { type: null, message: '' };
 };
 
 module.exports = {
   insert,
   findAll,
   findById,
+  del,
 };
