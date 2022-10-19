@@ -16,6 +16,28 @@ const insert = async (arr) => {
   return insertId;
 };
 
+const findAll = async () => {
+  const queryPart1 = 'SELECT sales.id saleId, sales.date, sp.product_id productId, sp.quantity ';
+  const queryPart2 = 'FROM StoreManager.sales as sales ';
+  const queryPart3 = 'INNER JOIN StoreManager.sales_products AS sp ON sp.sale_id = sales.id';
+  const [result] = await conn.execute(
+    queryPart1 + queryPart2 + queryPart3,
+  );
+  return result;
+};
+
+const findById = async (id) => {
+  const queryPart1 = 'SELECT sales.date, sp.product_id productId, sp.quantity';
+  const queryPart2 = 'FROM StoreManager.sales as sales';
+  const queryPart3 = 'INNER JOIN StoreManager.sales_products sp ON sp.sale_id = sales.id';
+  const [result] = await conn.execute(
+    `${queryPart1} ${queryPart2} ${queryPart3} WHERE sales.id = ?`, [id],
+  );
+  return result;
+};
+
 module.exports = {
   insert,
+  findAll,
+  findById,
 };

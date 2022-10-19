@@ -34,6 +34,19 @@ const insert = async (arr) => {
   return { id, itemsSold: arr };
 };
 
+const findAll = async () => {
+  const response = await salesModel.findAll();
+  return response;
+};
+
+const findById = async (id) => {
+  const response = await salesModel.findById(id);
+  if (response.length < 1) return { message: 'Sale not found' };
+  return response;
+};
+
 module.exports = {
   insert,
+  findAll,
+  findById,
 };
