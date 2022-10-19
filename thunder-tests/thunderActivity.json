@@ -18,16 +18,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/sales/50",
-    "method": "GET",
+    "url": "http://localhost:3000/products/200",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2022-10-17T17:58:28.947Z",
-    "modified": "2022-10-19T01:01:26.651Z",
+    "modified": "2022-10-19T02:39:00.465Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n    {\"productId\":1,\"quantity\":1},\n    {\"productId\":2,\"quantity\":5}\n]",
+      "raw": "{\n  \"name\": \"Maxcvxcv\"\n}",
       "form": []
     },
     "tests": []

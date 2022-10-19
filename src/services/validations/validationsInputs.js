@@ -9,7 +9,7 @@ const validateIdReq = (id) => {
 const validateNameReq = (nome) => {
   const { error } = nameJoi.validate(nome);
   if (error) {
-    return { type: 'INPUT_VALUE', message: '"name" length must be at least 5 characters long' };
+    return { type: 'INVALID_NAME', message: '"name" length must be at least 5 characters long' };
   }
   return { type: null, message: 'ok' };
 };

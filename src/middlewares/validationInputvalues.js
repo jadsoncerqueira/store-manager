@@ -21,7 +21,18 @@ const validateInputsSales = (req, res, next) => {
   }
 };
 
+const validateProductName = (req, res, next) => {
+  const { body } = req;
+  
+  if ('name' in body) {
+    next();
+  } else {
+    res.status(400).json({ message: '"name" is required' });
+  }
+};
+
 module.exports = {
   validateInputs,
   validateInputsSales,
+  validateProductName,
 };

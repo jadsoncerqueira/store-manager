@@ -22,14 +22,24 @@ const insertProducts = async (req, res) => {
   const { name } = req.body;
   const response = await productsService.insert(name);
 
-  if (response.type) return res.status(422).json({ message: response.message });
-  res.status(201).json({ id: response.message.insertId, name });
+  if (response.type) return res.status(mapError(response.type)).json({ message: response.message });
+  return res.status(201).json({ id: response.message.insertId, name });
+};
+
+const updateProduct = async (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+  const response = await productsService.update(id, name);
+
+  if (response.type) return res.status(mapError(response.type)).json({ message: response.message });
+  res.status(200).json({ id, name, response });
 };
 
 module.exports = {
   getProducts,
   getProductsById,
   insertProducts,
+  updateProduct,
 };
 
 // novo
