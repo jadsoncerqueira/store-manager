@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/', valInput.validateInputsSales, salesController.insertSales);
 router.get('/', salesController.getSales);
+router.put('/:id', valInput.validateInputsSales, salesController.updateSales);
 router.get('/:id', salesController.getByIdSales);
 router.delete('/:id', salesController.deleteSales);
 

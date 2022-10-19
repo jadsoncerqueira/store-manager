@@ -48,9 +48,18 @@ const del = async (id) => {
   );
 };
 
+const update = async (quantity, id, productId) => {
+  const [{ affectedRows }] = await conn.execute(
+    'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+    [quantity, id, productId],
+  );
+  return affectedRows;
+};
+
 module.exports = {
   insert,
   findAll,
   findById,
   del,
+  update,
 };

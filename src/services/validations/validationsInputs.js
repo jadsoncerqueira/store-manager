@@ -1,4 +1,4 @@
-const { idReq, nameJoi, quantityJoi } = require('./schema');
+const { idReq, nameJoi, quantityJoi, productJoi } = require('./schema');
 
 const validateIdReq = (id) => {
   const { error } = idReq.validate(id);
@@ -24,8 +24,19 @@ const validateQuantity = (quantity) => {
   return { type: null, message: 'ok' };
 };
 
+const validateProduct = (product) => {
+  const { error } = productJoi.validate(product);
+  if (error) {
+    return {
+      type: 'INVALID_PRODUCT', message: '"productId" must be greater than or equal to 1',
+    };
+  }
+  return { type: null, message: 'ok' };
+};
+
 module.exports = {
   validateIdReq,
   validateNameReq,
   validateQuantity,
+  validateProduct,
 };
