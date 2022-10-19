@@ -3,13 +3,13 @@ const { expect } = require('chai');
 const chai = require('chai');
 const sinon = require('sinon');
 // const chaiHttp = require('chai-http');
-const sinonChai = require('sinon-chai');
+// const sinonChai = require('sinon-chai');
 const { productsController  } = require('../../../src/controllers');
 const { productsService } = require('../../../src/services');
 const { listAllProductsMock } = require('./mocks/products.model.mock');
-const app = require('../../../src/app');
+// const app = require('../../../src/app');
 
-chai.use(sinonChai);
+// chai.use(sinonChai);
 // chai.use(chaiHttp);
 
 
@@ -22,8 +22,8 @@ describe('Camada Controller', function () {
 
     sinon.stub(productsService, 'findAll').resolves({ type: null, message: listAllProductsMock })
     await productsController.getProducts(req, res)
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(listAllProductsMock);
+    expect(res.status.calledWith(200)).to.be.eq(true);
+    expect(res.json.calledWith(listAllProductsMock)).to.be.eq(true);
     sinon.restore();
   });
   it('Retorna produto especifico', async function () {
@@ -35,8 +35,8 @@ describe('Camada Controller', function () {
     sinon.stub(productsService, 'findById').resolves({ type: null, message: [listAllProductsMock[0]] })
 
     await productsController.getProductsById(req, res);
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(listAllProductsMock[0])
+    expect(res.status.calledWith(200)).to.be.eq(true);
+    expect(res.json.calledWith(listAllProductsMock[0])).to.be.eq(true)
     sinon.restore();
   });
 
@@ -49,8 +49,8 @@ describe('Camada Controller', function () {
     sinon.stub(productsService, 'findById').resolves({ type: 'PRODUCTS_NOT_FOUND', message: 'Product not found' })
 
     await productsController.getProductsById(req, res);
-    expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ message: 'Product not found' })
+    expect(res.status.calledWith(404)).to.be.eq(true);
+    expect(res.json.calledWith({ message: 'Product not found' })).to.be.eq(true)
     sinon.restore();
   });
 
