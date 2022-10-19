@@ -32,10 +32,20 @@ const del = async (id) => {
   );
 };
 
+const findName = async (term) => {
+  const search = `%${term}%`;
+  const [result] = await conn.execute(
+    'SELECT * FROM StoreManager.products WHERE (name) LIKE (?)', [search],
+  );
+  // 
+  return result;
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   update,
   del,
+  findName,
 };

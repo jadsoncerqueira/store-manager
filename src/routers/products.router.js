@@ -4,9 +4,10 @@ const { valInput } = require('../middlewares');
 
 const router = express.Router();
 
-router.post('/', valInput.validateInputs, productsController.insertProducts);
 router.get('/', productsController.getProducts);
+router.get('/search', productsController.getProductName);
 router.get('/:id', productsController.getProductsById);
+router.post('/', valInput.validateInputs, productsController.insertProducts);
 router.put('/:id', valInput.validateProductName, productsController.updateProduct);
 router.delete('/:id', productsController.deleteProduct);
 

@@ -42,12 +42,19 @@ const deleteProduct = async (req, res) => {
   res.status(204).json();
 };
 
+const getProductName = async (req, res) => {
+  const { q } = req.query;
+  const response = await productsService.findName(q);
+  res.status(200).json(response.message);
+};
+
 module.exports = {
   getProducts,
   getProductsById,
   insertProducts,
   updateProduct,
   deleteProduct,
+  getProductName,
 };
 
 // novo

@@ -33,13 +33,15 @@ const update = async (id, name) => {
 };
 
 const del = async (id) => {
-  // const error = validateNameReq(name);
-  // if (error.type) return error;
-
   const response = await productsModel.findById(id);
   if (response.length === 0) return { type: 'PRODUCTS_NOT_FOUND', message: 'Product not found' };
   await productsModel.del(id);
   return { type: null, message: 'ok' };
+};
+
+const findName = async (term) => {
+  const response = await productsModel.findName(term);
+  return { type: null, message: response };
 };
 
 module.exports = {
@@ -48,4 +50,5 @@ module.exports = {
   insert,
   update,
   del,
+  findName,
 };
